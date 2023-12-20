@@ -5,10 +5,10 @@ import Navbar from "../componen/navbar";
 export default function Home(){
   const [username,setUsername] = useState('')
 
-  // function handlerSubmit(e){
-  //   e.preventDefault()
+  function handlerSubmit(e){
+    e.preventDefault()
     
-  // }
+  }
 
 
   return(
@@ -26,7 +26,7 @@ export default function Home(){
           </center>
         </div>
 
-      <form className="input-padding-x">
+      <form className="input-padding-x" onSubmit={handlerSubmit}>
         <div className="mb-3 p-1">
           <center>
             <label htmlFor="username" className="col form-label" >Username</label>
@@ -40,8 +40,8 @@ export default function Home(){
             
             <center>
             {/* <Buttom name='Start' action='/create'/> */}
-            <Buttom name='Create' action={!username ? '/':`/create/${username}`}/>
-            <Buttom name='Join' action={!username ? '/':`/join/${username}`}/>
+            <Buttom name='Create' action={`/create/${username}`}/>
+            <Buttom name='Join' action={`/join/${username}`}/>
             </center>
             
           </div>
