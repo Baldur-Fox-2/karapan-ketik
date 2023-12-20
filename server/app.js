@@ -9,7 +9,8 @@ const PORT = 3000
 const { v4: uuidv4 } = require('uuid');
 // const { Game } = require('./models')
 const { default: axios } = require('axios')
-const randomQuote = require('./quotableAPI')
+const randomQuote = require('./quotable')
+const { finished } = require('stream')
 
 const io = new Server(httpServer, {
     cors: {
@@ -54,15 +55,25 @@ io.on('connect', (socket)=> {
             console.log(error)
         }
     })
+
+    // socket.on('join-test', async() => {
+    //     console.log('a user joined game');
+    //     try {
+    //     console.log(socket.id)
+            
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // })
     
     socket.on('create-game', async(nickName)=>{
     try {
         
         console.log(nickName,'server')
         const gameCode = 'karapan' + uuidv4();
-        const words = await randomQuote()
+        const words = await randomQuote()   
         let player = {
-            socketId : socket.id,
+            playerId : socket.id,
             isPartyLeader: true,
             nickName
         }
@@ -83,12 +94,14 @@ io.on('connect', (socket)=> {
     }
    })
 
-   
+   socket.on('winner-user', async(winner) => {
+    io.emit("winner", winner)
+   })
 })
 
 
 
 httpServer.listen(PORT, ()=> {
-    console.log('Listenint to port: ' + PORT)
+    console.log('Listening to port: ' + PORT)
 })
 

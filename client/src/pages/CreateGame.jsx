@@ -27,6 +27,7 @@ export default function CreateGame(){
     useEffect(()=>{
        socket.on('updateGame', (game)=>{
         dispatch(fetchGame(game))
+        console.log(game, "<<<<<")
        })
     },[])
 

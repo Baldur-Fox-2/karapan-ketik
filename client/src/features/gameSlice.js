@@ -6,7 +6,7 @@ const initialState = {
     isOpen: true,
     isOver: false,
     players: [],
-    words: []
+    words: ""
 }
 
 export const gameSlice = createSlice({

@@ -11,6 +11,7 @@ export default function Home(){
       <div className="text-center">
         <h1>Welcome to Karapan Ketik</h1>
         <button type="button" onClick={()=> navigate('/game/create')} >Create Game</button>
+        <button type="button" onClick={()=> navigate('/game/join')} >JOIN</button>
       </div>
       </>
     )
