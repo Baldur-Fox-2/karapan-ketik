@@ -17,8 +17,12 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-console.log('ges')
+
   // ...
+ 
+  socket.on('status', (finished)=> {
+    console.log(finished)
+  })
 });
 
 app.use(cors())
