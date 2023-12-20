@@ -34,7 +34,7 @@ export default function Home(){
         <div className="mb-3 p-1">
           <center>
             <label htmlFor="username" className="col form-label" >Username</label>
-            <input onChange={(e)=> setUsername(e.target.value)} className="form-control" id="exampleInputPassword1" style={{width:"300px"}}/>
+            <input onChange={(e)=> setUsername(e.target.value)} className="form-control" id="username" style={{width:"300px"}}/>
           </center>
         </div>
       </form>
