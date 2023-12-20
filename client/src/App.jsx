@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 // import './App.css'
-import socket from "./socket";
+// import socket from "./socket";
 
 const quote = () =>
-  "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae dolores soluta praesentium doloribus id dolorum quam facere aperiam aliquam, consequatur quia ex fuga quisquam deleniti voluptate voluptatem temporibus voluptates ratione?".split(
-    " "
-  );
+  "Lorem elit.".split(" ");
 
 function App() {
   // const [isConnect, setIsConnect] = useState(socket.connected);
@@ -13,15 +11,24 @@ function App() {
   const [userInput, setUserInput] = useState("");
 
   const [indexWords, setIndexWords] = useState(0);
-  const [correct, setCorrect] = useState(null)
+  const [correct, setCorrect] = useState(0);
 
+  const [done, setFinish] = useState("unfinish");
 
   function handleCorrectWord(value) {
     if (value.endsWith(" ")) {
       if (userInput === getQuote.current[indexWords]) {
+        console.log(indexWords, "====", getQuote.current.length-1);
+        if(indexWords === getQuote.current.length-1){
+          setFinish("done bang");// ini langsung ke sockett
+          console.log('masukkk');
+        }
         setIndexWords((index) => index + 1);
+        setCorrect((prevState) => prevState + 1);
         setUserInput("");
       }
+      console.log(done)
+
     } else {
       setUserInput(value);
     }
@@ -55,7 +62,6 @@ function App() {
                         key={index}
                         style={{
                           color: "black",
-                          font
                         }}
                       >
                         {words}{" "}
@@ -74,7 +80,7 @@ function App() {
             paddingTop: "5%",
           }}
         >
-          <form className="mb-3" onSubmit="">
+
             <label
               style={{
                 fontFamily: "cursive",
@@ -89,7 +95,7 @@ function App() {
               onChange={(e) => handleCorrectWord(e.target.value)}
               value={userInput}
             />
-          </form>
+       
         </div>
       </div>
     </>
