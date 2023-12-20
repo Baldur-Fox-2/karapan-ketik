@@ -1,12 +1,15 @@
 // import Card from "../componen/card";
+import { useParams } from "react-router-dom";
 import Buttom from "../componen/buttom";
 import Navbar from "../componen/navbar";
 
 
 export default function Join(){
+    const {username}= useParams()
+
     return (
         <>
-        <Navbar name='join'/>
+        <Navbar/>
         {/* <Card name={name} /> */}
 
         <div className="card bg-dark-subtle" style={{margin:"100px 100px", width:"600px"}}>
@@ -17,10 +20,10 @@ export default function Join(){
 
             <form action="">
             <label htmlFor="username" className="form-label">Username</label>
-            <input  type="text" className="form-control" id="username" style={{width:"300px"}}/><br/>
+            <input  type="text" className="form-control" id="username" style={{width:"300px"}} defaultValue={username}/><br/>
 
-            <Buttom name='Join' action='submit'/>
-            <Buttom name='Create' action='/create'/>
+            <Buttom name='Play Now' action='submit'/>
+            <Buttom name='Create' action={!username ? '/':`/create/${username}`}/>
             </form>
 
         </div>

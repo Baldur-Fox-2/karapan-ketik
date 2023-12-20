@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Buttom from "../componen/buttom";
 import Navbar from "../componen/navbar";
-import { useNavigate } from "react-router-dom";
 
 export default function Home(){
   const [username,setUsername] = useState('')
 
-  function handlerSubmit(e){
-    e.preventDefault()
+  // function handlerSubmit(e){
+  //   e.preventDefault()
     
-  }
+  // }
 
-  // useEffect(()=>{
-  //   handlerSubmit()
-  // })
 
   return(
     <>
-    <Navbar name='home'/>
+    <Navbar/>
       <div className="card d-flex bg-dark-subtle" style={{width:"45rem", height:"500px", margin:"60px auto", padding:"50px"}}>
 
         <div className="mb-3 p-7">
@@ -30,7 +26,7 @@ export default function Home(){
           </center>
         </div>
 
-      <form className="input-padding-x" onSubmit={handlerSubmit}>
+      <form className="input-padding-x">
         <div className="mb-3 p-1">
           <center>
             <label htmlFor="username" className="col form-label" >Username</label>
@@ -44,8 +40,8 @@ export default function Home(){
             
             <center>
             {/* <Buttom name='Start' action='/create'/> */}
-            <Buttom name='Create' action='/create'/>
-            <Buttom name='Join' action='/join'/>
+            <Buttom name='Create' action={!username ? '/':`/create/${username}`}/>
+            <Buttom name='Join' action={!username ? '/':`/join/${username}`}/>
             </center>
             
           </div>

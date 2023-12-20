@@ -1,9 +1,12 @@
 // import Card from "../componen/card";
+import { useParams } from "react-router-dom";
 import Buttom from "../componen/buttom";
 import Navbar from "../componen/navbar";
 
 
 export default function Create(){
+  const {username} = useParams()
+  
     return(
         <>
         <Navbar name='create'/>
@@ -16,10 +19,10 @@ export default function Create(){
 
     <form action="">
       <label htmlFor="username" className="form-label">Username</label>
-      <input type="text" className="form-control" id="username" style={{width:"300px"}}/><br/>
+      <input type="text" className="form-control" id="username" style={{width:"300px"}} defaultValue={username}/><br/>
 
-      <Buttom name='Create' action='submit'/>
-      <Buttom name='Join' action='/join' />
+      <Buttom name='Play Now' action='submit'/>
+      <Buttom name='Join' action={!username ? '/':`/join/${username}`} />
     </form>
 
   </div>

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import Buttom from "../../../../karapan-ngetik/navbarComponen/buttom";
+// import Buttom from "../componen/buttom";
 
-export default function Navbar({name}){
+export default function Navbar(){
     const navigate = useNavigate()
     return(
         <>
