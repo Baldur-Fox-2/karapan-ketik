@@ -1,0 +1,18 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+/* body{
+    background-color: black;
+} */
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+    display: block;
+    margin: 0;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    letter-spacing: 2px;
+    background-color: #1b263d;
+  }
