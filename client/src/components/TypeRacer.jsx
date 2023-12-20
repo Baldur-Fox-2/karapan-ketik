@@ -28,7 +28,6 @@ export default function TypeRacer({gameState}) {
   return (
     <>
       <div className="text-center">
-        <h1>ini type racer</h1>
         <DisplayWords words={words} player={player} />
         <ProgressBar players={players} player={player} wordsLength={words.length} />
         <Form isOpen={isOpen} isOver={isOver} gameCode={gameCode} />

@@ -14,9 +14,7 @@ export default function Game(){
         return state.game
     })
     const waiting = gameState
-    console.log(gameState, 'di game')
-
-    // const user = JSON.parse(localStorage.getItem('userJoin'));
+    // console.log(gameState, 'di game')
     
 
     useEffect(()=>{
@@ -36,11 +34,9 @@ export default function Game(){
     
     return(
         <>
-        {
-            waiting.players.map(player => {
-                return <h2>Player : {player.nickName}</h2>
-            })    
-        }
+        <br />
+        <br />
+
             <TypeRacer gameState={gameState} players={waiting.players} />
         </>
     )
