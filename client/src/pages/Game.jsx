@@ -18,23 +18,21 @@ export default function Game(){
 
     // const user = JSON.parse(localStorage.getItem('userJoin'));
     
-    useEffect(()=>{
-        console.log('<><><><>')
-        socket.emit('join-test')
-
-        // socket.on('updateGame', (game)=>{
-        //     console.log(game, 'di client <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-        //     dispatch(fetchGame(game))
-        //    })
-        
-     },[])
 
     useEffect(()=>{
-        // if(localStorage.userJoin){
-        //     socket.emit('join-game')
-        // }
-        
+        socket.on('join-game', (games)=> {
+        })
     }, [])
+
+    useEffect(()=>{
+        socket.on('updateGame', (game)=>{
+         // console.log(game, 'di client')
+         dispatch(fetchGame(game))
+        })
+        return () => {
+         socket.removeAllListeners()
+        }
+     },[])
     
     return(
         <>
@@ -43,7 +41,7 @@ export default function Game(){
                 return <h2>Player : {player.nickName}</h2>
             })    
         }
-            <TypeRacer gameState={gameState} player={waiting.players} />
+            <TypeRacer gameState={gameState} players={waiting.players} />
         </>
     )
 }

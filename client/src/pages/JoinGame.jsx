@@ -32,8 +32,10 @@ export default function JoinGame(){
        socket.on('updateGame', (game)=>{
         // console.log(game, 'di client')
         dispatch(fetchGame(game))
-        
        })
+       return () => {
+        socket.removeAllListeners()
+       }
     },[])
 
     
