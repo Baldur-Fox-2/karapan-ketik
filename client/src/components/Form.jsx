@@ -26,6 +26,17 @@ export default function Form({isOpen, isOver, gameCode}){
         }
     }
 
+    useEffect(() => {
+        socket.on('error', (text)=> {
+            console.log(text, 'ini error di joingame')
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: text
+              });
+        })
+    },[])
+
     return(
         <>
         <div className="row my-3">

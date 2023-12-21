@@ -40,7 +40,7 @@ io.on('connect', (socket)=> {
 
     socket.on('userInput', async({userInput,gameId}) => {
         try {
-            let game = await games.find(el => el.gameCode == gameId)
+            let game = games.find(el => el.gameCode == gameId)
             if(!game.isOpen && !game.isOver){
                 let player = game.players.find(player => player.playerId === socket.id)
                 let word = game.words[player.currentWordIndex]
@@ -59,12 +59,13 @@ io.on('connect', (socket)=> {
             }
         } catch (error) {
             console.log(error)
+            socket.emit('error', 'Please try again')
         }
     })
 
     socket.on('timer', async({gameId, playerId})=>{
         let countDown = 5;
-        let game = await games.find(el => el.gameCode == gameId)
+        let game = games.find(el => el.gameCode == gameId)
         let player = game.players.find(el => el.playerId === playerId)
         if(player.isPartyLeader){
             let timerId = setInterval(async()=>{
@@ -85,7 +86,7 @@ io.on('connect', (socket)=> {
     socket.on('join-game', async({gameId, nickName}) => {
         console.log('a user joined game');
         try {
-            let game = await games.find(el => el.gameCode == gameId)
+            let game = games.find(el => el.gameCode == gameId)
             console.log(gameId)
             console.log(game.isOpen, 'ini di join-game')
             if(game.isOpen){
@@ -103,6 +104,7 @@ io.on('connect', (socket)=> {
             }
         } catch (error) {
             console.log(error)
+            socket.emit('error', 'Game room not found!')
         }
     })
 
@@ -133,6 +135,7 @@ io.on('connect', (socket)=> {
         io.to(gameId).emit('updateGame', game)
     } catch (error) {
         console.log(error)
+        socket.emit('error', 'Cannot create game, please try again!')
     }
    })
 

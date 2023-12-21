@@ -32,6 +32,17 @@ export default function CreateGame(){
        })
     },[])
 
+    useEffect(() => {
+        socket.on('error', (text)=> {
+            console.log(text, 'ini error di joingame')
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: text
+              });
+        })
+    },[])
+
     useEffect(()=>{
         if(gameState.gameCode !== ""){
             navigate(`/game/${gameState.gameCode}`)
