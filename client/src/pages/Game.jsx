@@ -14,36 +14,30 @@ export default function Game(){
         return state.game
     })
     const waiting = gameState
-    console.log(gameState, 'di game')
-
-    // const user = JSON.parse(localStorage.getItem('userJoin'));
+    // console.log(gameState, 'di game')
     
-    useEffect(()=>{
-        console.log('<><><><>')
-        socket.emit('join-test')
-
-        // socket.on('updateGame', (game)=>{
-        //     console.log(game, 'di client <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-        //     dispatch(fetchGame(game))
-        //    })
-        
-     },[])
 
     useEffect(()=>{
-        // if(localStorage.userJoin){
-        //     socket.emit('join-game')
-        // }
-        
+        socket.on('join-game', (games)=> {
+        })
     }, [])
+
+    useEffect(()=>{
+        socket.on('updateGame', (game)=>{
+         // console.log(game, 'di client')
+         dispatch(fetchGame(game))
+        })
+        return () => {
+         socket.removeAllListeners()
+        }
+     },[])
     
     return(
         <>
-        {
-            waiting.players.map(player => {
-                return <h2>Player : {player.nickName}</h2>
-            })    
-        }
-            <TypeRacer gameState={gameState} player={waiting.players} />
+        <br />
+        <br />
+
+            <TypeRacer gameState={gameState} players={waiting.players} />
         </>
     )
 }
