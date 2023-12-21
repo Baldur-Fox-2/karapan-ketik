@@ -4,6 +4,7 @@ import CreateGame from "./pages/CreateGame";
 import Game from "./pages/Game";
 import JoinGame from "./pages/JoinGame";
 import Navbar from "./components/Navbar";
+import About from "./pages/About";
 
 const AppLayout = () => (
     <>
@@ -13,12 +14,17 @@ const AppLayout = () => (
 )
 
 const router = createBrowserRouter([
+
     {
         element: <AppLayout />,
         children: [
             {
                 path: '/',
                 element: <Home />
+            },
+            {
+                path: '/about',
+                element: <About />
             },
             {
                 path: '/game/create',
@@ -31,7 +37,8 @@ const router = createBrowserRouter([
             {
                 path: '/game/join',
                 element: <JoinGame />
-            }
+            },
+           
         ]
     }
 ])
