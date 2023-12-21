@@ -21,7 +21,7 @@ export default function TypeRacer({gameState}) {
 
   const { gameCode, players, words, isOpen, isOver } = gameState
   const player = findPlayer(players)
-  console.log(player)
+  // console.log(player)
  
 
 
