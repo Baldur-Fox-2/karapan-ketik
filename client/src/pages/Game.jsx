@@ -1,49 +1,38 @@
-import { useState, useEffect } from "react"
-import socket from "../socketConfig"
-import { useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchGame } from "../features/gameSlice"
-import TypeRacer from "../components/TypeRacer"
+import { useState, useEffect } from "react";
+import socket from "../socketConfig";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGame } from "../features/gameSlice";
+import TypeRacer from "../components/TypeRacer";
 
+export default function Game() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-export default function Game(){
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+  const gameState = useSelector((state) => {
+    return state.game;
+  });
+  const waiting = gameState;
 
-    const gameState = useSelector(state => {
-        return state.game
-    })
-    const waiting = gameState
-    console.log(gameState, 'di game')
+  useEffect(() => {
+    socket.on("join-game", (games) => {});
+  }, []);
 
-    // const user = JSON.parse(localStorage.getItem('userJoin'));
-    
-    useEffect(()=>{
-        console.log('<><><><>')
-        socket.emit('join-test')
+  useEffect(() => {
+    socket.on("updateGame", (game) => {
+      dispatch(fetchGame(game));
+    });
+    return () => {
+      socket.removeAllListeners();
+    };
+  }, []);
 
-        // socket.on('updateGame', (game)=>{
-        //     console.log(game, 'di client <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-        //     dispatch(fetchGame(game))
-        //    })
-        
-     },[])
+  return (
+    <>
+      <br />
+      <br />
 
-    useEffect(()=>{
-        // if(localStorage.userJoin){
-        //     socket.emit('join-game')
-        // }
-        
-    }, [])
-    
-    return(
-        <>
-        {
-            waiting.players.map(player => {
-                return <h2>Player : {player.nickName}</h2>
-            })    
-        }
-            <TypeRacer gameState={gameState} player={waiting.players} />
-        </>
-    )
+      <TypeRacer gameState={gameState} players={waiting.players} />
+    </>
+  );
 }

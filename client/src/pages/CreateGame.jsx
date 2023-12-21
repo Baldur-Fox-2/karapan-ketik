@@ -3,6 +3,7 @@ import socket from "../socketConfig"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchGame } from "../features/gameSlice"
+import Button from "../components/Button"
 
 
 export default function CreateGame(){
@@ -39,22 +40,26 @@ export default function CreateGame(){
 
     return(
         <>
-        <div className="row">
-            <div className="col-sm">
-                <div className="col-sm-8">
-                    <h1 className="text-center">Create game</h1>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-grup">
+        
+        <div className="card bg-dark-subtle" style={{margin:"100px 100px", width:"600px"}}>
+
+            <div className="card-body">
+
+                <h5 className="card-title">Create</h5>
+
+                <form onSubmit={handleSubmit}>
+                <div className="form-grup">
                             <div htmlFor="nickname">Enter Nickname</div>
                             <input type="text" name="nickName"
                             onChange={handleChange}
                             className="form-control"
                             />
                         </div>
-                        <button className="btn btn-primary" type="submit">Submit</button>
-                    </form>
-                </div>
+                <Button name='Play Now' action='submit'/>
+                </form>
+
             </div>
+
         </div>
         </>
     )
