@@ -141,7 +141,7 @@ io.on('connect', (socket)=> {
 const startGameClock = (gameId) => {
     let game = games.find(el => el.gameCode == gameId)
     game.startTime = new Date().getTime()
-    let time = 10;
+    let time = 15;
     let timerId = setInterval(function gameIntervalFunc(){
         const formatTime = calculateTime(time)
         if(time >= 0){
@@ -161,7 +161,6 @@ const startGameClock = (gameId) => {
                 io.to(gameId).emit('updateGame', game)
                 clearInterval(timerId)
             })()
-
         }
         return gameIntervalFunc
     },1000)
